@@ -9,8 +9,9 @@ vector <int> seat_vec;
 vector <pair <int, int>> id_vec;
 
 void put_seat(int id){
+    for (auto i: seat_vec) cout << i << " ";
+    cout << endl;
     int max_index, max_num = 0, cdist;
-
     for (int i=0; i<seat_vec.size()-1; i++){
         cdist = seat_vec[i+1] - seat_vec[i];
         if (cdist > max_num){
@@ -28,7 +29,10 @@ void put_seat(int id){
         max_index = -1;
         cdist = cdist-seat_num;
     }
-
+    if (cdist == seat_num && max_index != seat_num-2){
+        max_index = -1;
+        cdist = 1;
+    }
     seat_vec.insert(seat_vec.begin()+max_index+1, cdist);
     id_vec.push_back(make_pair(id, cdist));
 
@@ -46,7 +50,7 @@ bool find_id(int id){
     return false;
 }
 
-void get_input(){
+void cafeX(){
     int inp = 1, flag = 0;
     cin >> seat_num >> record_num;
     seat_vec = {1};
@@ -64,6 +68,6 @@ void get_input(){
 }
 
 int main(){
-    get_input();
+    cafeX();
     return 0;
 }
