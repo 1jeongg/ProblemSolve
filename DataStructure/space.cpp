@@ -3,39 +3,31 @@
 #include <tuple>
 using namespace std;
 
-void space(){
-    int start_num, end_num, index;
-    vector<tuple<int, int, bool>> space;
+int start_num, end_num, start_id, end_id;
+vector<tuple<int, int, bool>> space;
 
+void space_func(){
     cin >> start_num >> end_num;
-    index = start_num % 3;
-    for (int i=start_num; i<=end_num; i++){
-        space.push_back(make_tuple(i, index, false));
-        index++;
-        if (index == 3) index = 0;
-    }
-
-    index = 0;
+    for (int i=start_num; i<=end_num; i++)
+        space.push_back(make_tuple(i, i%3, false));
 
     for (int i=0; i<end_num-start_num; i++){
-        get<2>(space[index]) = true;
-        int cnt = 1, my_max = get<1>(space[index]) + 2, myindex = index;
-        while (cnt <= my_max){
-            myindex++;
-            if (myindex > end_num-start_num){
-                index = myindex = 0;
-                my_max -= cnt;
-                cnt = 0;
+        get<2>(space[start_id]) = true;
+        int moved = 1, distance = get<1>(space[start_id]) + 2;
+        while (moved <= distance){
+            end_id += 1;
+            if (end_id > end_num-start_num){
+                distance -= moved;
+                start_id = end_id = moved = 0;
             }
-
-            if(!get<2>(space[index+cnt])) cnt++;
-            else index++;
+            if(!get<2>(space[start_id+moved])) moved += 1;
+            else start_id += 1;
         }
-        index = myindex;
+        start_id = end_id;
     }
-    cout << get<0>(space[index]) << endl;
+    cout << get<0>(space[end_id]);
 }
 int main(){
-    space();
+    space_func();
     return 0;
 }
