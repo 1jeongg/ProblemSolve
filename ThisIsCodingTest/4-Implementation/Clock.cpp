@@ -15,4 +15,4 @@ int main() {
     Clock();
     return 0;
 }
-// 5
+// 예시: 5
