@@ -30,4 +30,4 @@ int main() {
     LRUD();
     return 0;
 }
-// 5 R R R U D D
+// example input: 5 R R R U D D
